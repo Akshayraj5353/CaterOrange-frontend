@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Card, FormLabel, FormControl, Container, Alert } from 'react-bootstrap';
 import axios from 'axios'
 import "../css/Signup.css"
 
 export default function Signup() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,7 +27,8 @@ export default function Signup() {
         try {
             const response = await axios.post('https://cater-orange-backend.vercel.app/api/Register', formData);
             console.log(response.data); // handle successful response
-            // Redirect or show a success message to the user
+            alert("registration successfull ")
+            navigate('/login')
         } catch (error) {
             console.error('Error:', error.message); // handle error
             if (error.response && error.response.data && error.response.data.error) {
